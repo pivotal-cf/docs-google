@@ -3,39 +3,51 @@ breadcrumb: PCF Services
 title: Installing the Service Broker
 ---
 
-This topic describes how to install the Google Service Broker by configuring your GCP account and importing the product file into Ops Manager.
-
-##Installation Prerequisites
-
-* Pivotal Cloud Foundry version 1.7 or later.
-* A Google Cloud Platform (GCP) project and service account with owner permissions
-* An available MySQL database
+This topic describes how to install the GCP Service Broker by configuring your GCP account and importing the product file into Pivotal Cloud Foundry (PCF) Operations Manager (Ops Manager).
 
 ##<a id="setup"></a>Step 1: Set up your GCP Project and Service Account
 
-In this step you'll set up your "root" Service Account.
+Follow these steps to set up your "root" Service Account.
 
-1. Navigate to IAM & Admin > Service accounts and click "Create Service Account"
-1. Give your service account a name and select Role "Project > Owner"
-1. Click "Furnish a new Private Key"
-1. Click "Create"
-1. Save the downloaded key file somewhere secure
+1. From the GCP console, navigate to **IAM & Admin** > **Service accounts** and click **Create Service Account**. 
+1. Enter a **Service account name**. 
+1. For **Role**, choose **Project** > **Owner**. 
+1. Select the checkbox to **Furnish a new Private Key**, then click **Create**. 
+1. Save the automatically downloaded key file in a secure location.
 
-##<a id="setup"></a>Step 2: Create Service Broker Database
+##<a id="setup"></a>Step 2: Create a Service Broker Database
 
-You may choose any MySQL database you like to back the Service Broker. If you would like to use CloudSQL, you can follow the instructions below.
+You can use any MySQL database to back the Service Broker. To use GCP Cloud SQL, follow the instructions below:
 
-1. Set up your database instance with whatever settings you like
-1. When it has booted, click through to Access Control > SSL and click "Create Client Certificate"
-1. Enter a name and click "Add"
-1. When the certificate creation has finished, download the 3 files and save them somewhere secure
-1. Take note of the connection string given at the bottom of the popup
-1. Under Access Control > Networks, click "Add Network"
-1. Record the network as 0.0.0.0/0 and click "Done"
-1. connect to the host machine using the connection string from earlier
-1. run `CREATE DATABASE servicebroker;`
-1. run `CREATE USER '<username>'@'%' IDENTIFIED BY '<password>';`
-1. run `GRANT ALL PRIVILEGES ON servicebroker.* TO '<username>'@'%' WITH GRANT OPTION;`
+1. From the GCP console, select **SQL**, then click **Create instance**. 
+1. Choose either **Second Generation** or **First Generation**. 
+1. Configure your database:
+	* Enter an **Instance ID**. 
+	* Choose a **Database version**. 
+	* Choose a **Region** and **Zone** in which to host the database. 
+	* Select a **Machine type**. 
+	* Select a **Storage type**. 
+	* Enter a **Storage capacity**. 
+	* Enable automatic storage increase?
+	* Create failover replica?
+	* Enable automated backups?
+	* Enable binary logging?
+	* Maintenance window?
+	* Authorized networks?
+1. Click **Create**.
+1. Once the instance boots, click its name in the list of SQL instances. 
+1. Select **Access Control** > **SSL**.
+1. Click **Create Client Certificate**. 
+1. Enter a name and click **Add**. 
+1. A popup appears. Download the three certificate files and save them in a secure location.
+1. Record the connection string given at the bottom of the popup.
+1. Under **Access Control** > **Authorization**, click **Add Network**. 
+1. Enter `0.0.0.0/0` in the **Network** field and click **Done**. 
+1. From a terminal window, connect to the host machine using the connection string you recorded. 
+1. Run the following commands:
+	1. `CREATE DATABASE servicebroker;`
+	1. `CREATE USER 'USERNAME'@'%' IDENTIFIED BY 'PASSWORD';`
+	1. `GRANT ALL PRIVILEGES ON servicebroker.* TO 'USERNAME'@'%' WITH GRANT OPTION;`
 
 ##<a id="install"></a>Step 3: Install in Ops Manager
 
@@ -47,26 +59,28 @@ To install the GCP Service Broker tile in Ops Manager, complete the following st
 
 1. Click **Add** next to the uploaded product description in the **Available Products** view to add this product to your staging area.
 
-1. Click on the newly added tile to configure the sections as described below.
+##<a id="install"></a>Step 4: Configure in Ops Manager
+
+Click the newly added tile and configure the following sections:
 
 ###<a id="root-service-account"></a>Root Service Account
-1. Click "Root Service Account"
-1. Open your service account private key file and copy the contents to the text box
-1. Click "Save"
+1. Click **Root Service Account**. 
+1. Paste the contents of your service account private key file from [Step 1](#setup) into the text box. 
+1. Click **Save**. 
 
 ###<a id="database-properties"></a>Database Properties
-1. Click "Database Properties"
-1. Fill in your Service Broker  backing database properties
-1. Click "Save"
+1. Click **Database Properties**. 
+1. Fill in your Service Broker backing database properties?
+1. Click **Save**. 
 
-###<a id="cloudsql-plans"></a>CloudSQL Plans
-1. Click "Dynamic Service Plans"
-1. For as many plans as you would like, click "Add"
-1. Input a plan name to save in the database, a display name, and description
-1. Input a case-sensitive Tier value (see https://cloud.google.com/sql/pricing for details)
-1. If you have selected a first generation instance type, optionally change your pricing plan
-1. If you have selected a second generation instance type, optionally enter a maximum disk size in GB
-1. Click "Save"
+###<a id="plans"></a>Dynamic Service Plans
+1. Click **Dynamic Service Plans**. 
+1. To create a plan, click **Add**. 
+1. Enter a plan name, a display name, and a description to display in the database.
+1. Enter a case-sensitive **Tier** value. See the [Cloud SQL Pricing](https://cloud.google.com/sql/pricing) topic for details. 
+1. (Optional) If you selected a first generation instance type when creating your Cloud SQL database, you can change your pricing plan
+1. (Optional) If you selected a second generation instance type when creating your Cloud SQL database, enter a maximum disk size in GB. 
+1. Click **Save**. 
 
 
 ##<a id="confirm"></a>Step 4: Confirm Installation
@@ -75,4 +89,4 @@ To install the GCP Service Broker tile in Ops Manager, complete the following st
 
 1. After Ops Manager finishes the installation, the **GCP Service Broker** appears as a green tile in the **Installation Dashboard**.
 
-1. In Apps Manager, all orgs and spaces show the new services in the Services Marketplace. Users can create instances of these services through Apps Manager or via the cf CLI. Review the [Creating and Managing Service Instances](using.html) topic for more information.
+1. In Apps Manager, all orgs and spaces show the new services in the Services Marketplace. Users can create instances of these services through Apps Manager or via the cf CLI. Review the [USING GCP Service Broker](using.html) topic for more information.

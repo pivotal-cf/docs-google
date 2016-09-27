@@ -1,194 +1,151 @@
 ---
 breadcrumb: PCF Services
-title: Creating and Managing Service Instances
+title: Using GCP Service Broker
 ---
-
-##<a id="overview"></a>Overview
 
 This topic describes how developers set up, operate, and scale Google Cloud Platform (GCP) resources from Pivotal Cloud Foundry (PCF) by creating and managing service instances using the GCP Service Broker.
 
-PCF operators must follow the instructions in the [Installing the Service Broker](installation.html) topic to install the GCP Service Broker before developers can use it.
-
-The current version of the GCP Service Broker supports the following services:
-
-* Google Cloud Storage
-* Google CloudSQL
-* Google PubSub
-* Google BigQuery
-* Google Machine Learning APIs
-
 ##<a id="view"></a>View Services
 
-1. List available Marketplace Services with `cf marketplace` to show information about the GCP Service Broker services.
+1. Run `cf marketplace` to list the available GCP Service Broker services.
 
-1. View descriptions for the plans of a service with `cf marketplace -s SERVICE`.
+1. Run `cf marketplace -s SERVICE` to view the descriptions for the plans of a service.
 
-<p class="note"><strong>Note</strong>: see https://cloud.google.com/pricing/#details for pricing information for each service.</p>
+<p class="note"><strong>Note</strong>: See the <a href="https://cloud.google.com/pricing/#details">GCP Pricing</a> topic to view pricing details for each service.</p>
 
 ##<a id="create"></a>Create Service Instances
 
-<p class="note"><strong>Note</strong>: When <a href="installation.html">installing</a> the GCP Service Broker, the PCF operator sets up a Service Account and provides credentials to the Service Broker. Developers do not need access to the credentials to create service instances.</p>
+This section describes how to create instances of each of the services supported by the GCP Service Broker.
 
 ###<a id="storage"></a>Google Cloud Storage
 
-Using `cf create-service` to create an instance of `google-storage` will create a new bucket.
+#### Create 
+Run `cf create-service google-storage` to create a new bucket. The following example creates a bucket named `mybucket` with the `standard` plan:
 
-Required custom parameters are
-
-* name
-
-Optional custom parameters are
-
-* location (defaults to us)
-
-The following example creates a bucket named `mybucket` with the `standard` plan:
 <pre class="terminal">$ cf create-service google-storage standard mybucket -c '{"name": "mybucket"}'
 </pre>
 
-Using `cf bind-service` to bind to an instance of `google-storage` will create a new service account and private key.
+Optionally, you can provide a location for your storage bucket. This parameter defaults to `us`. 
 
-Required custom parameters are
 
-* role
+#### Bind
 
-The following example creates a service account with minimum necessary permissions to view bucket objects (see https://cloud.google.com/iam/docs/understanding-roles for mor information)
+Bind the `google-storage` service to an app to create a new service account and private key. The following example creates a service account with the minimum necessary permissions to view bucket objects. See the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic for more information.
 
 <pre class="terminal">$ cf bind-service myapp mybucket -c '{"role": "storage.objectViewer"}'
 </pre>
 
-Using `cf unbind-service` will delete this service account and key.
+<p class="note"><strong>Note</strong>: Running  <code>cf unbind-service</code> deletes the service account and key created when binding.</p>
+
 
 ###<a id="bigquery"></a>Google BigQuery
 
-Using `cf create-service` to create an instance of `google-bigquery` will create a new dataset.
 
-Required custom parameters are
-* name
+#### Create 
 
-The following example creates a dataset named `mydataset` with the `default` plan:
+Run `cf create-service google-bigquery` to create a new dataset. The following example creates a dataset named `mydataset` with the `default` plan:
 <pre class="terminal">$ cf create-service google-bigquery default mydataset -c '{"name": "mydataset"}'
 </pre>
 
-Using `cf bind-service` to bind to an instance of `google-bigquery` will create a new service account and private key.
+#### Bind
 
-Required custom parameters are
+Bind the `google-bigquery` service to an app to create a new service account and private key.
 
-* role
-
-The following example creates a service account with minimum necessary permissions to view datasets (see https://cloud.google.com/iam/docs/understanding-roles for mor information)
+The following example creates a service account with the minimum necessary permissions to view datasets. See the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic for more information.
 
 <pre class="terminal">$ cf bind-service myapp mydataset -c '{"role": "bigquery.dataViewer"}'
 </pre>
 
-Using `cf unbind-service` will delete this service account and key.
+<p class="note"><strong>Note</strong>: Running  <code>cf unbind-service</code> deletes the service account and key created when binding.</p>
 
 ###<a id="pubsub"></a>Google PubSub
 
-Using `cf create-service` to create an instance of `google-pubsub` will create a new topic and optional subscription.
+#### Create 
 
-Required custom parameters are
-
-* topic\_name
-
-Optional custom parameters are
-
-* subscription\_name
-* is\_push (defaults to false, to set use "true")
-* endpoint (for when is\_push == "true", defaults to nil)
-* ack\_deadline (in seconds, defaults to 10, max 600)
-
-The following example creates a topic named `mytopic` and a pull subscription named "mysubscription" with the `default` plan:
+Run `cf create-service google-pubsub` to create a new topic and optional subscription. The following example creates a topic named `mytopic` and a pull subscription named `mysubscription` with the `default` plan:
 <pre class="terminal">$ cf create-service google-pubsub default mypubsub -c '{"topic\_name": "mytopic", "subscription\_name": "mysubscription"}'
 </pre>
 
-Using `cf bind-service` to bind to an instance of `google-pubsub` will create a new service account and private key.
+You can optionally specify the following parameters:
 
-Required custom parameters are
+* `subscription_name`
+* `is_push`: Defaults to false
+* `endpoint`: For when `is_push` = `true`. Defaults to `nil`.
+* `ack_deadline`: In seconds. Defaults to `10` with a maximum of `600`.
 
-* role
+#### Bind
 
-The following example creates a service account with minimum necessary permissions to view topics and subscriptions (see https://cloud.google.com/iam/docs/understanding-roles for mor information)
+Bind the `google-pubsub` service to an app to create a new service account and private key. The following example creates a service account with minimum necessary permissions to view topics and subscriptions. See the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic for more information.
 
 <pre class="terminal">$ cf bind-service myapp mypubsub -c '{"role": "pubsub.viewer"}'
 </pre>
 
-Using `cf unbind-service` will delete this service account and key.
+<p class="note"><strong>Note</strong>: Running  <code>cf unbind-service</code> deletes the service account and key created when binding.</p>
 
 ###<a id="cloudsql"></a>Google CloudSQL
 
-Using `cf create-service` to create an instance of `google-cloudsql` will create a new database instance and database.
-Google CloudSQL uses asynchronous provisioning.
-PCF Operators will need to create custom plans for Google CloudSQL when installing the service broker.
+#### Create 
 
-Required custom parameters are
-
-* instance\_name
-* database\_name
-
-Optional custom parameters are
-
-* version (defaults to 5.6)
-* disk\_size in GB (only for 2nd gen, defaults to 10)
-* region (defaults to us-central)
-* zone (for 2nd gen)
-* disk\_type (for 2nd gen, defaults to ssd)
-* failover\_replica\_name (only for 2nd gen, if specified creates a failover replica, defaults to "")
-* maintenance\_window\_day (for 2nd gen only, defaults to 1 (Sunday))
-* maintenance\_window\_hour (for 2nd gen only, defaults to 0)
-* backups\_enabled (defaults to true, set to "false" to disable)
-* backup\_start\_time (defaults to 06:00)
-* binlog (defaults to false for 1st gen, true for 2nd gen, set to "true" to use)
-* activation\_policy (defaults to on demand)
-* replication\_type (defaults to synchronous)
-* auto\_resize (2nd gen only, defaults to false, set to "true" to use)
-
-The following example creates an instance named `myinstance` and a database named "mydb" with a custom `d4_standard` plan:
+Run `cf create-service google-cloudsql` to create a new database instance and database. PCF Operators create custom plans for Google Cloud SQL when installing the GCP Service Broker. The following example creates an instance named `myinstance` and a database named `mydb` with a custom `d4_standard` plan:
 <pre class="terminal">$ cf create-service google-cloudsql d4\_standard mycloudsql -c '{"instance\_name": "myinstance", "database\_name": "mydb"}'
 </pre>
 
-Using `cf bind-service` to bind to an instance of `google-cloudsql` will create a new user and set of ssl certs.
+<p class="note"><strong>Note</strong>: Google CloudSQL uses asynchronous provisioning.</p>
 
-Required custom parameters are
+You can optionally specify the following parameters:
 
-* username
-* password
+* `version`: Defaults to `5.6`.
+* `disk_size`: In GB. Only for 2nd gen, defaults to `10`.
+* `region`: Defaults to `us-central`.
+* `zone`: Only for 2nd gen.
+* `disk_type`: Only for 2nd gen. Defaults to `ssd`.
+* `failover_replica_name`: Only for 2nd gen. Creates a failover replica if specified. Defaults to "". 
+* `maintenance_window_day`: For 2nd gen only. Defaults to `1`, which is Sunday.
+* `maintenance_window_hour`: For 2nd gen only, defaults to `0`.
+* `backups_enabled` Defaults to `true`. Set to `false` to disable.
+* `backup_start_time`: Defaults to `06:00`.
+* `binlog`: Defaults to `false` for 1st gen, `true` for 2nd gen. Set to `true` to use. 
+* `activation_policy`: Defaults to on demand.
+* `replication_type`: Defaults to `synchronous`
+* `auto_resize`: For 2nd gen only. Defaults to `false`. Set to `true` to use.
 
-The following example creates a new user and ssl certs
+
+
+#### Bind
+
+Bind the `google-cloudsql` service to an app to create a new user and set of ssl certs. The following example creates a new user and ssl certs.
 
 <pre class="terminal">$ cf bind-service myapp mycloudsql -c '{"username": "myuser", "password": "mypass"}'
 </pre>
 
-Using `cf unbind-service` will delete this user and invalidate the created ssl certs.
+<p class="note"><strong>Note</strong>: Running  <code>cf unbind-service</code> deletes this user and invalidate the created ssl certs.</p>
 
 
 ###<a id="pubsub"></a>Google Machine Learning APIs
 
-Using `cf create-service` to create an instance of `google-ml-apis` will create nothing - this service is for bindings only.
+#### Create 
 
-The following example creates a bindable cf app named `mymlapis`:
+You cannot create instances of the `google-ml-apis` service it is for bindings only. The following example creates a bindable cf app named `mymlapis`: 
+
 <pre class="terminal">$ cf create-service google-ml-apis default mymlapis
 </pre>
 
-Using `cf bind-service` to bind to an instance of `google-mlapis` will create a new service account and private key.
+#### Bind 
 
-Required custom parameters are
-
-* role
-
-The following example creates a service account with minimum necessary permissions to use the ml apis (see https://cloud.google.com/iam/docs/understanding-roles for mor information)
+Bind the `google-mlapis` service to an app to create a new service account and private key. The following example creates a service account with the minimum necessary permissions to use the Machine Learning APIs. See the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic for more information.
 
 <pre class="terminal">$ cf bind-service myapp mymlapis -c '{"role": "viewer"}'
 </pre>
 
-Using `cf unbind-service` will delete this service account and key.
+<p class="note"><strong>Note</strong>: Running  <code>cf unbind-service</code> deletes the service account and key created when binding.</p>
 
 ##<a id="delete"></a>Delete a Service Instance
 
-<p class="note"><strong>Note</strong>: Before deleting a service instance, ensure there are no apps bound to the service instance and no data contained within (e.g. objects in a storage bucket)</p>
+<p class="note"><strong>Note</strong>: Before deleting a service instance, ensure there are no apps bound to the service instance and no data contained within, such as objects in a storage bucket.</p>
 Run the following command to delete a service instance:
 <pre class="terminal">$ cf delete-service YOUR-SERVICE-INSTANCE
-    Really delete the service YOUR-SERVICE-INSTANCE> y
-     Deleting service YOUR-SERVICE-INSTANCE in org system / space dev1 as appdev1...
-     OK
-     Delete in progress. Use 'cf services' or 'cf service YOUR-SERVICE-INSTANCE' to check operation status.
+Really delete the service YOUR-SERVICE-INSTANCE> y
+Deleting service YOUR-SERVICE-INSTANCE in org system / space dev1 as appdev1...
+OK
+Delete in progress. Use 'cf services' or 'cf service YOUR-SERVICE-INSTANCE' to check operation status.
 </pre>
