@@ -125,7 +125,8 @@ Bind the `google-cloudsql` service to an app to create a new user and set of ssl
 
 #### Create 
 
-You cannot create instances of the `google-ml-apis` service it is for bindings only. The following example creates a bindable cf app named `mymlapis`: 
+Using `cf create-service` to create an instance of `google-ml-apis` will not create any resources - this service is for bindings only.
+It is likely that this implementation will change in the future.
 
 <pre class="terminal">$ cf create-service google-ml-apis default mymlapis
 </pre>
