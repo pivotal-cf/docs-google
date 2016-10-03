@@ -163,7 +163,7 @@ Using `cf unbind-service` will delete this user and invalidate the created ssl c
 
 ###<a id="pubsub"></a>Google Machine Learning APIs
 
-Using `cf create-service` to create an instance of `google-ml-apis` will create nothing - this service is for bindings only.
+Using `cf create-service` to create an instance of `google-ml-apis` will not create any resources - this service is for bindings only.
 
 The following example creates a bindable cf app named `mymlapis`:
 <pre class="terminal">$ cf create-service google-ml-apis default mymlapis

@@ -23,9 +23,9 @@ In this step you'll set up your "root" Service Account.
 
 ##<a id="setup"></a>Step 2: Create Service Broker Database
 
-You may choose any MySQL database you like to back the Service Broker. If you would like to use CloudSQL, you can follow the instructions below.
+You may choose any MySQL database you like to back the Service Broker. If you would like to use CloudSQL (which is advised if your cf installation is on GCP already), you can follow the instructions below.
 
-1. Set up your database instance with whatever settings you like
+1. Set up your database instance with default settings
 1. When it has booted, click through to Access Control > SSL and click "Create Client Certificate"
 1. Enter a name and click "Add"
 1. When the certificate creation has finished, download the 3 files and save them somewhere secure
@@ -51,16 +51,25 @@ To install the GCP Service Broker tile in Ops Manager, complete the following st
 
 ###<a id="root-service-account"></a>Root Service Account
 1. Click "Root Service Account"
+    <%= image_tag("images/root_service_account.png") %>
 1. Open your service account private key file and copy the contents to the text box
 1. Click "Save"
 
 ###<a id="database-properties"></a>Database Properties
 1. Click "Database Properties"
-1. Fill in your Service Broker  backing database properties
+    <%= image_tag("images/database_properties.png") %>
+1. Enter your database's public ip under host name
+1. Enter your database's username, password, and ssl-certs
+1. Change your database's port if you have configured anything other than 3306
 1. Click "Save"
 
-###<a id="cloudsql-plans"></a>CloudSQL Plans
-1. Click "Dynamic Service Plans"
+###<a id="cloudsql-plans"></a>CloudSQL Custom Plans
+
+If you want to use CloudSQL you'll need to configure plans for it in the CloudSQL Custom Plans Plans section.
+If you do not want to use CloudSQL, you can simply ignore this section.
+
+1. Click "CloudSQL Custom Plans"
+    <%= image_tag("images/cloudsql_custom_plans.png") %>
 1. For as many plans as you would like, click "Add"
 1. Input a plan name to save in the database, a display name, and description
 1. Input a case-sensitive Tier value (see https://cloud.google.com/sql/pricing for details)
@@ -68,6 +77,15 @@ To install the GCP Service Broker tile in Ops Manager, complete the following st
 1. If you have selected a second generation instance type, optionally enter a maximum disk size in GB
 1. Click "Save"
 
+###<a id="cloudsql-plans"></a>Service Access
+
+By default access is enabled for all orgs and spaces to all services and plans used by the GCP Service Broker. If you would
+like to default this access to off,
+
+1. Click "Service Access"
+    <%= image_tag("images/service_access.png") %>
+1. Uncheck "Enable global access to plans of service gcp_service_broker"
+1. Click "Save"
 
 ##<a id="confirm"></a>Step 4: Confirm Installation
 
@@ -76,3 +94,10 @@ To install the GCP Service Broker tile in Ops Manager, complete the following st
 1. After Ops Manager finishes the installation, the **GCP Service Broker** appears as a green tile in the **Installation Dashboard**.
 
 1. In Apps Manager, all orgs and spaces show the new services in the Services Marketplace. Users can create instances of these services through Apps Manager or via the cf CLI. Review the [Creating and Managing Service Instances](using.html) topic for more information.
+
+##<a id="service-access"></a>Step 5: Confirm Service and Plan access
+
+By default the service broker is installed with all services enabled except CloudSQL, unless plans have been configured.
+
+1. If you would like to disable any services (or enable any, if you changed the default behavior),
+ you can do so now through the cf cli using `cf disable-service-access`.
