@@ -11,7 +11,21 @@ This topic describes how to install the Google Service Broker by configuring you
 * A Google Cloud Platform (GCP) project and service account with owner permissions
 * An available MySQL database
 
-##<a id="setup"></a>Step 1: Set up your GCP Project and Service Account
+##<a id="setup"></a>Step 1: Set up your GCP Project
+
+In this step you'll create your project and enable necessary apis
+
+1. go to console.cloud.google.com and sign up, walking through the setup wizard
+1. Next to the Google Cloud Platform logo in the upper left-hand corner, click the dropdown and select "Create Project"
+1. Give your project a name and click "Create"
+1. When the project is created (a notification will show in the upper right), refresh the page.
+1. Click "Library" from the menu on the left
+1. Search "google cloud resource manager api", click the option with no other modifiers, and enable.
+1. Search "Google Identity and Access Management (IAM) API", click the option with no other modifiers, and enable.
+1. If you wish to use CloudSQL, search "sqladmin", click the only option, and enable.
+
+
+##<a id="setup"></a>Step 2: Set up your root Service Account
 
 In this step you'll set up your "root" Service Account.
 
@@ -21,7 +35,7 @@ In this step you'll set up your "root" Service Account.
 1. Click "Create"
 1. Save the downloaded key file somewhere secure
 
-##<a id="setup"></a>Step 2: Create Service Broker Database
+##<a id="setup"></a>Step 3: Create Service Broker Database
 
 You may choose any MySQL database you like to back the Service Broker. If you would like to use CloudSQL (which is advised if your cf installation is on GCP already), you can follow the instructions below.
 
@@ -37,7 +51,7 @@ You may choose any MySQL database you like to back the Service Broker. If you wo
 1. run `CREATE USER '<username>'@'%' IDENTIFIED BY '<password>';`
 1. run `GRANT ALL PRIVILEGES ON servicebroker.* TO '<username>'@'%' WITH GRANT OPTION;`
 
-##<a id="install"></a>Step 3: Install in Ops Manager
+##<a id="install"></a>Step 4: Install in Ops Manager
 
 To install the GCP Service Broker tile in Ops Manager, complete the following steps:
 
@@ -87,7 +101,7 @@ like to default this access to off,
 1. Uncheck "Enable global access to plans of service gcp_service_broker"
 1. Click "Save"
 
-##<a id="confirm"></a>Step 4: Confirm Installation
+##<a id="confirm"></a>Step 5: Confirm Installation
 
 <p class="note"><strong>Note</strong>: The GCP Service Broker installs an app called <code>gcp-service-broker</code> in the <code>gcp-service-broker-space</code> space of the <code>gcp-service-broker-org</code> org.</p>
 
