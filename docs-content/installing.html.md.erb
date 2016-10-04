@@ -5,9 +5,9 @@ title: Installing and Configuring GCP Service Broker
 
 This topic describes how to install the GCP Service Broker by configuring your GCP account and importing the product file into Pivotal Cloud Foundry (PCF) Operations Manager (Ops Manager).
 
-##<a id="setup"></a>Step 1: Set up your GCP Project
+##<a id="setup"></a>Step 1: Set up a GCP Project
 
-Follow these steps to create your project and enable necessary APIs
+Follow these steps to create a project and enable necessary APIs
 
 1. Navigate to `console.cloud.google.com`. If you do not have an account, sign up and walk through the setup wizard.
 1. From the GCP console, click the dropdown to the left of the search bar and select **Create Project**.
@@ -19,9 +19,9 @@ Follow these steps to create your project and enable necessary APIs
 1. If you want to use Cloud SQL as your service broker database, search for `sqladmin` and click the only option, then click **Enable**.
 
 
-##<a id="setup"></a>Step 2: Set up your root Service Account
+##<a id="setup"></a>Step 2: Set up a root Service Account
 
-Follow these steps to set up your "root" Service Account.
+Follow these steps to set up a "root" Service Account.
 
 1. From the GCP console, navigate to **IAM & Admin** > **Service accounts** and click **Create Service Account**. 
 1. Enter a **Service account name**. 
@@ -61,7 +61,7 @@ To install the GCP Service Broker tile in Ops Manager, complete the following st
 
 1. Click **Add** next to the uploaded product description in the **Available Products** view to add this product to your staging area.
 
-##<a id="install"></a>Step 4: Configure in Ops Manager
+##<a id="install"></a>Step 5: Configure in Ops Manager
 
 Click the newly added tile and configure the following sections:
 
@@ -79,9 +79,9 @@ Click the newly added tile and configure the following sections:
 1. Ensure your database port is `3306`. Modify your port configuration if necessary.  
 1. Click **Save**. 
 
-###<a id="plans"></a>CloudSQL Custom Plans
+###<a id="plans"></a>Cloud SQL Custom Plans
 
-If you want to use CloudSQL, you must configure plans in this section. If you do not want to use CloudSQL, ignore this section.
+If you want to use Cloud SQL, you must configure plans in this section. If you do not want to use Cloud SQL, ignore this section.
 
 1. Click **CloudSQL Custom Plans**. 
 	<%= image_tag("images/cloudsql_custom_plans.png") %>
@@ -100,7 +100,7 @@ By default, all orgs and spaces can access all services and plans used by the GC
 1. Uncheck **Enable global access to plans of service gcp_service_broker**.
 1. Click **Save**.
 
-##<a id="confirm"></a>Step 5: Confirm Installation
+##<a id="confirm"></a>Step 6: Confirm Installation
 
 <p class="note"><strong>Note</strong>: The GCP Service Broker installs an app called <code>gcp-service-broker</code> in the <code>gcp-service-broker-space</code> space of the <code>gcp-service-broker-org</code> org.</p>
 
@@ -108,8 +108,8 @@ By default, all orgs and spaces can access all services and plans used by the GC
 
 1. In Apps Manager, all orgs and spaces show the new services in the Services Marketplace. Users can create instances of these services through Apps Manager or via the cf CLI. Review the [Using GCP Service Broker](using.html) topic for more information.
 
-##<a id="service-access"></a>Step 5: Confirm Service and Plan access
+##<a id="service-access"></a>Step 7: Confirm Service and Plan Access
 
-The GCP Service Broker installs with all services enabled by default, except for CloudSQL, which you chose to enable or not enable during configuration. 
+The GCP Service Broker installs with all services enabled by default, except for Cloud SQL, which you chose to enable or not enable during configuration. 
 
 You can disable or enable any services through the cf CLI using `cf disable-service-access` or `cf enable-service-access`.
