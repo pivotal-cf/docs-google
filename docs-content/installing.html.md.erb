@@ -1,22 +1,22 @@
 ---
 breadcrumb: PCF Services
-title: Installing the Service Broker
+title: Installing and Configuring GCP Service Broker
 ---
 
 This topic describes how to install the GCP Service Broker by configuring your GCP account and importing the product file into Pivotal Cloud Foundry (PCF) Operations Manager (Ops Manager).
 
 ##<a id="setup"></a>Step 1: Set up your GCP Project
 
-In this step you'll create your project and enable necessary apis
+Follow these steps to create your project and enable necessary APIs
 
-1. go to console.cloud.google.com and sign up, walking through the setup wizard
-1. Next to the Google Cloud Platform logo in the upper left-hand corner, click the dropdown and select "Create Project"
-1. Give your project a name and click "Create"
-1. When the project is created (a notification will show in the upper right), refresh the page.
-1. Click "Library" from the menu on the left
-1. Search "google cloud resource manager api", click the option with no other modifiers, and enable.
-1. Search "Google Identity and Access Management (IAM) API", click the option with no other modifiers, and enable.
-1. If you wish to use CloudSQL, search "sqladmin", click the only option, and enable.
+1. Navigate to `console.cloud.google.com`. If you do not have an account, sign up and walk through the setup wizard.
+1. From the GCP console, click the dropdown to the left of the search bar and select **Create Project**.
+1. Enter a project name and click **Create**.
+1. A notification appears confirming the creation of your project. Refresh the page.
+1. Navigate to **API Manager** -> **Library**.
+1. Enter `Google Cloud Resource Manager API` in the search bar and click the matching result, then click **Enable**.
+1. Enter `Google Identity and Access Management (IAM) API` in the search bar and click the matching result, the click **Enable**.
+1. If you want to use Cloud SQL as your service broker database, search for `sqladmin` and click the only option, then click **Enable**.
 
 
 ##<a id="setup"></a>Step 2: Set up your root Service Account
