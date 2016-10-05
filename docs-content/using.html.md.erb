@@ -22,13 +22,13 @@ This section describes how to create instances of each of the services supported
 ###<a id="storage"></a>Google Cloud Storage
 
 #### Create 
+
 Run `cf create-service google-storage` to create a new bucket. The following example creates a bucket named `mybucket` with the `standard` plan:
 
 <pre class="terminal">$ cf create-service google-storage standard mybucket -c '{"name": "mybucket"}'
 </pre>
 
 Optionally, you can provide a location for your storage bucket. This parameter defaults to `us`. 
-
 
 #### Bind
 
@@ -37,11 +37,9 @@ Bind the `google-storage` service to an app to create a new service account and 
 <pre class="terminal">$ cf bind-service myapp mybucket -c '{"role": "storage.objectViewer"}'
 </pre>
 
-<p class="note"><strong>Note</strong>: Running  <code>cf unbind-service</code> deletes the service account and key created when binding.</p>
-
+<p class="note"><strong>Note</strong>: Run <code>cf unbind-service</code> to  delete the service account and key created when binding.</p>
 
 ###<a id="bigquery"></a>Google BigQuery
-
 
 #### Create 
 
@@ -58,7 +56,7 @@ The following example creates a service account with the minimum necessary permi
 <pre class="terminal">$ cf bind-service myapp mydataset -c '{"role": "bigquery.dataViewer"}'
 </pre>
 
-<p class="note"><strong>Note</strong>: Running  <code>cf unbind-service</code> deletes the service account and key created when binding.</p>
+<p class="note"><strong>Note</strong>: Run <code>cf unbind-service</code> to delete the service account and key created when binding.</p>
 
 ###<a id="pubsub"></a>Google PubSub
 
@@ -71,9 +69,9 @@ Run `cf create-service google-pubsub` to create a new topic and optional subscri
 You can optionally specify the following parameters:
 
 * `subscription_name`
-* `is_push`: Defaults to false
+* `is_push`: Defaults to false.
 * `endpoint`: For when `is_push` = `true`. Defaults to `nil`.
-* `ack_deadline`: In seconds. Defaults to `10` with a maximum of `600`.
+* `ack_deadline`: In seconds. Defaults to `10`, with a maximum of `600`.
 
 #### Bind
 
@@ -82,7 +80,7 @@ Bind the `google-pubsub` service to an app to create a new service account and p
 <pre class="terminal">$ cf bind-service myapp mypubsub -c '{"role": "pubsub.viewer"}'
 </pre>
 
-<p class="note"><strong>Note</strong>: Running  <code>cf unbind-service</code> deletes the service account and key created when binding.</p>
+<p class="note"><strong>Note</strong>: Run <code>cf unbind-service</code> to  delete the service account and key created when binding.</p>
 
 ###<a id="cloudsql"></a>Google CloudSQL
 
@@ -108,9 +106,8 @@ You can optionally specify the following parameters:
 * `backup_start_time`: Defaults to `06:00`.
 * `binlog`: Defaults to `false` for 1st gen, `true` for 2nd gen. Set to `true` to use. 
 * `activation_policy`: Defaults to on demand.
-* `replication_type`: Defaults to `synchronous`
+* `replication_type`: Defaults to `synchronous`.
 * `auto_resize`: For 2nd gen only. Defaults to `false`. Set to `true` to use.
-
 
 
 #### Bind
@@ -120,14 +117,13 @@ Bind the `google-cloudsql` service to an app to create a new user and set of ssl
 <pre class="terminal">$ cf bind-service myapp mycloudsql -c '{"username": "myuser", "password": "mypass"}'
 </pre>
 
-<p class="note"><strong>Note</strong>: Running  <code>cf unbind-service</code> deletes this user and invalidate the created ssl certs.</p>
-
+<p class="note"><strong>Note</strong>: Run <code>cf unbind-service</code> to delete this user and invalidate the created ssl certs.</p>
 
 ###<a id="pubsub"></a>Google Machine Learning APIs
 
 #### Create 
 
-Using `cf create-service` to create an instance of `google-ml-apis` will not create any resources - this service is for bindings only.
+Using `cf create-service` to create an instance of `google-ml-apis` will not create any resources. This service is for bindings only.
 It is likely that this implementation will change in the future.
 
 <pre class="terminal">$ cf create-service google-ml-apis default mymlapis
@@ -140,7 +136,7 @@ Bind the `google-mlapis` service to an app to create a new service account and p
 <pre class="terminal">$ cf bind-service myapp mymlapis -c '{"role": "viewer"}'
 </pre>
 
-<p class="note"><strong>Note</strong>: Running  <code>cf unbind-service</code> deletes the service account and key created when binding.</p>
+<p class="note"><strong>Note</strong>: Run <code>cf unbind-service</code> to  delete the service account and key created when binding.</p>
 
 ##<a id="delete"></a>Delete a Service Instance
 

@@ -3,29 +3,28 @@ breadcrumb: PCF Services
 title: Installing and Configuring GCP Service Broker
 ---
 
-This topic describes how to install the GCP Service Broker by configuring your GCP account and importing the product file into Pivotal Cloud Foundry (PCF) Operations Manager (Ops Manager).
+This topic describes how to install the Google Cloud Platform (GCP) Service Broker by configuring your GCP account and importing the product file into Pivotal Cloud Foundry PCF Operations Manager.
 
 ##<a id="setup"></a>Step 1: Set up a GCP Project
 
 Follow these steps to create a project and enable necessary APIs
 
-1. Navigate to `console.cloud.google.com`. If you do not have an account, sign up and walk through the setup wizard.
+1. In a browser, navigate to [https://console.cloud.google.com](https://console.cloud.google.com). If you do not have an account, sign up and use the setup wizard to create an account.
 1. From the GCP console, click the dropdown to the left of the search bar and select **Create Project**.
 1. Enter a project name and click **Create**.
 1. A notification appears confirming the creation of your project. Refresh the page.
-1. Navigate to **API Manager** -> **Library**.
+1. Navigate to **API Manager > Library**.
 1. Enter `Google Cloud Resource Manager API` in the search bar and click the matching result, then click **Enable**.
 1. Enter `Google Identity and Access Management (IAM) API` in the search bar and click the matching result, the click **Enable**.
 1. If you want to use Cloud SQL as your service broker database, search for `sqladmin` and click the only option, then click **Enable**.
 
+##<a id="setup"></a>Step 2: Set up a Root Service Account
 
-##<a id="setup"></a>Step 2: Set up a root Service Account
+Follow the steps below to set up a "root" Service Account.
 
-Follow these steps to set up a "root" Service Account.
-
-1. From the GCP console, navigate to **IAM & Admin** > **Service accounts** and click **Create Service Account**. 
+1. From the GCP console, navigate to **IAM & Admin > Service accounts** and click **Create Service Account**. 
 1. Enter a **Service account name**. 
-1. For **Role**, choose **Project** > **Owner**. 
+1. For **Role**, choose **Project > Owner**. 
 1. Select the checkbox to **Furnish a new Private Key**, then click **Create**. 
 1. Save the automatically downloaded key file in a secure location.
 
@@ -38,18 +37,18 @@ You can use any MySQL database to back the Service Broker. To use GCP Cloud SQL,
 1. From the GCP console, select **SQL**, then click **Create instance**. 
 1. Set up your database instance with the default settings and click **Create**.
 1. Once the instance boots, click its name in the list of SQL instances. 
-1. Select **Access Control** > **SSL**.
+1. Select **Access Control > SSL**.
 1. Click **Create Client Certificate**. 
 1. Enter a name and click **Add**. 
 1. A popup appears. Download the three certificate files and save them in a secure location.
 1. Record the connection string given at the bottom of the popup.
-1. Under **Access Control** > **Authorization**, click **Add Network**. 
+1. Under **Access Control > Authorization**, click **Add Network**. 
 1. Enter `0.0.0.0/0` in the **Network** field and click **Done**. 
-1. From a terminal window, connect to the host machine using the connection string you recorded. 
-1. Run the following commands:
-	1. `CREATE DATABASE servicebroker;`
-	1. `CREATE USER 'USERNAME'@'%' IDENTIFIED BY 'PASSWORD';`
-	1. `GRANT ALL PRIVILEGES ON servicebroker.* TO 'USERNAME'@'%' WITH GRANT OPTION;`
+1. From a terminal window, connect to the host machine using the connection string that you recorded in an earlier step. 
+1. In the terminal window, run the following commands:
+    1. `CREATE DATABASE servicebroker;`
+    1. `CREATE USER 'USERNAME'@'%' IDENTIFIED BY 'PASSWORD';`
+    1. `GRANT ALL PRIVILEGES ON servicebroker.* TO 'USERNAME'@'%' WITH GRANT OPTION;`
 
 ##<a id="install"></a>Step 4: Install in Ops Manager
 
@@ -66,50 +65,53 @@ To install the GCP Service Broker tile in Ops Manager, complete the following st
 Click the newly added tile and configure the following sections:
 
 ###<a id="root-service-account"></a>Root Service Account
+
 1. Click **Root Service Account**. 
-	<%= image_tag("images/root_service_account.png") %>
+    <%= image_tag("images/root_service_account.png") %>
 1. Paste the contents of your service account private key file from [Step 1](#setup) into the text box. 
-1. Click **Save**. 
+1. Click **Save**.
 
 ###<a id="database-properties"></a>Database Properties
+
 1. Click **Database Properties**.
     <%= image_tag("images/database_properties.png") %>
-1. For **hostname**, enter the public IP of your database. 
+1. For **hostname**, enter the public IP address of your database. 
 1. Enter the username, password, and ssl-certs for your database. 
-1. Ensure your database port is `3306`. Modify your port configuration if necessary.  
+1. Ensure your database port is set to `3306`. Modify your port configuration if necessary.
 1. Click **Save**. 
 
 ###<a id="plans"></a>Cloud SQL Custom Plans
 
 If you want to use Cloud SQL, you must configure plans in this section. If you do not want to use Cloud SQL, ignore this section.
 
-1. Click **CloudSQL Custom Plans**. 
-	<%= image_tag("images/cloudsql_custom_plans.png") %>
+1. Click **CloudSQL Custom Plans**.
+    <%= image_tag("images/cloudsql_custom_plans.png") %>
 1. To create a plan, click **Add**. 
 1. Enter a plan name, a display name, and a description to display in the database.
 1. Enter a case-sensitive **Tier** value. See the [Cloud SQL Pricing](https://cloud.google.com/sql/pricing) topic for details. 
-1. (Optional) If you selected a first generation instance type when creating your Cloud SQL database, you can change your pricing plan
-1. (Optional) If you selected a second generation instance type when creating your Cloud SQL database, enter a maximum disk size in GB. 
+1. (Optional) If you selected a first generation instance type when creating your Cloud SQL database, you can change your pricing plan.
+1. (Optional) If you selected a second generation instance type when creating your Cloud SQL database, enter a maximum disk size in GB.
 1. Click **Save**. 
 
 ###<a id="service-access"></a>Service Access
 
-By default, all orgs and spaces can access all services and plans used by the GCP Service Broker. Follow these instructions to turn off the default access:
+By default, all orgs and spaces can access all services and plans used by the GCP Service Broker. Follow the instructions below to disable the default access. 
+
 1. Click **Service Access**.
     <%= image_tag("images/service_access.png") %>
-1. Uncheck **Enable global access to plans of service gcp_service_broker**.
+1. Clear the **Enable global access to plans of service gcp\_service\_broker** checkbox. 
 1. Click **Save**.
 
 ##<a id="confirm"></a>Step 6: Confirm Installation
 
-<p class="note"><strong>Note</strong>: The GCP Service Broker installs an app called <code>gcp-service-broker</code> in the <code>gcp-service-broker-space</code> space of the <code>gcp-service-broker-org</code> org.</p>
+<p class="note"><strong>Note</strong>: The GCP Service Broker installs an app named <code>gcp-service-broker</code> in the <code>gcp-service-broker-space</code> space of the <code>gcp-service-broker-org</code> org.</p>
 
 1. After Ops Manager finishes the installation, the **GCP Service Broker** appears as a green tile in the **Installation Dashboard**.
 
-1. In Apps Manager, all orgs and spaces show the new services in the Services Marketplace. Users can create instances of these services through Apps Manager or via the cf CLI. Review the [Using GCP Service Broker](using.html) topic for more information.
+1. In Apps Manager, all orgs and spaces show the new services in the Services Marketplace. Users can create instances of these services through Apps Manager or by using the Cloud Foundry Command Line Interface (cf CLI). Review the [Using GCP Service Broker](using.html) topic for more information.
 
 ##<a id="service-access"></a>Step 7: Confirm Service and Plan Access
 
-The GCP Service Broker installs with all services enabled by default, except for Cloud SQL, which you chose to enable or not enable during configuration. 
+The GCP Service Broker installs with all services enabled by default, except for Cloud SQL, which you select to enable or not during configuration. 
 
 You can disable or enable any services through the cf CLI using `cf disable-service-access` or `cf enable-service-access`.
