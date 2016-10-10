@@ -3,11 +3,11 @@ breadcrumb: PCF Services
 title: Installing and Configuring GCP Service Broker
 ---
 
-This topic describes how to install the Google Cloud Platform (GCP) Service Broker by configuring your GCP account and importing the product file into Pivotal Cloud Foundry PCF Operations Manager.
+This topic describes how to install the Google Cloud Platform (GCP) Service Broker by configuring your GCP account and importing the product file into Pivotal Cloud Foundry (PCF) Operations Manager.
 
 ##<a id="setup"></a>Step 1: Set up a GCP Project
 
-Follow these steps to create a project and enable necessary APIs
+Follow the steps below to create a project and enable necessary APIs.
 
 1. In a browser, navigate to [https://console.cloud.google.com](https://console.cloud.google.com). If you do not have an account, sign up and use the setup wizard to create an account.
 1. From the GCP console, click the dropdown to the left of the search bar and select **Create Project**.
@@ -26,7 +26,7 @@ Follow the steps below to set up a "root" Service Account.
 1. Enter a **Service account name**. 
 1. For **Role**, choose **Project > Owner**. 
 1. Select the checkbox to **Furnish a new Private Key**, then click **Create**. 
-1. Save the automatically downloaded key file in a secure location.
+1. Save the automatically downloaded key file to a secure location.
 
 ##<a id="setup"></a>Step 3: Create a Service Broker Database
 
@@ -40,7 +40,7 @@ You can use any MySQL database to back the Service Broker. To use GCP Cloud SQL,
 1. Select **Access Control > SSL**.
 1. Click **Create Client Certificate**. 
 1. Enter a name and click **Add**. 
-1. A popup appears. Download the three certificate files and save them in a secure location.
+1. A popup appears. Download the three certificate files and save them to a secure location.
 1. Record the connection string given at the bottom of the popup.
 1. Under **Access Control > Authorization**, click **Add Network**. 
 1. Enter `0.0.0.0/0` in the **Network** field and click **Done**. 
