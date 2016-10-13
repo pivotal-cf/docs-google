@@ -16,22 +16,13 @@ Follow the steps below to create a project and enable necessary APIs.
 1. Navigate to **API Manager > Library**.
 1. Enter `Google Cloud Resource Manager API` in the search bar and click the matching result, then click **Enable**.
 1. Enter `Google Identity and Access Management (IAM) API` in the search bar and click the matching result, the click **Enable**.
-1. If you want to use Cloud SQL as your service broker database, search for `sqladmin` and click the only option, then click **Enable**.
+1. If you want to enable CloudSQL as a service, search for `sqladmin` and click the only option, then click **Enable**.
 
 ##<a id="setup"></a>Step 2: Set up a Root Service Account
 
 Follow the steps below to set up a "root" Service Account.
 
-1. go to console.cloud.google.com and sign up, walking through the setup wizard
-1. Next to the Google Cloud Platform logo in the upper left-hand corner, click the dropdown and select "Create Project"
-1. Give your project a name and click "Create"
-1. When the project is created (a notification will show in the upper right), go to "API Manager" in the left nav.
-1. Click "Library" from the menu on the left
-1. Search "google cloud resource manager api", click the option with no other modifiers, and enable.
-1. Search "Google Identity and Access Management (IAM) API", click the option with no other modifiers, and enable.
-1. If you wish to use CloudSQL, search "sqladmin", click the only option, and enable.
-
-1. From the GCP console, navigate to **IAM & Admin > Service accounts** and click **Create Service Account**. 
+1. From the GCP console, navigate to **IAM & Admin > Service accounts** and click **Create Service Account**.
 1. Enter a **Service account name**. 
 1. For **Role**, choose **Project > Owner**. 
 1. Select the checkbox to **Furnish a new Private Key**, then click **Create**. 
