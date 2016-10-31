@@ -13,7 +13,7 @@ The procedures in this topic require the [Cloud Foundry Command Line Interface](
 
 1. Run `cf marketplace -s SERVICE` to view the descriptions for the plans of a service.
 
-<p class="note"><strong>Note</strong>: See the <a href="https://cloud.google.com/pricing/#details">GCP Pricing</a> topic to view pricing details for each service.</p>
+<p class="note"><strong>Note</strong>: To view pricing details for each service, see the <a href="https://cloud.google.com/pricing/#details">GCP Pricing</a> topic.</p>
 
 ##<a id="create"></a>Create Service Instances
 
@@ -32,7 +32,8 @@ Optionally, you can provide a location for your storage bucket. This parameter d
 
 #### Bind
 
-Bind the `google-storage` service to an app to create a new service account and private key. The following example creates a service account with the minimum necessary permissions to view bucket objects. See the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic for more information.
+Bind the `google-storage` service to an app to create a new service account and private key. The following example creates a service account with the minimum necessary permissions to view bucket objects. 
+For more information, see the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic.
 
 <pre class="terminal">$ cf bind-service myapp mybucket -c '{"role": "storage.objectViewer"}'
 </pre>
@@ -51,7 +52,8 @@ Run `cf create-service google-bigquery` to create a new dataset. The following e
 
 Bind the `google-bigquery` service to an app to create a new service account and private key.
 
-The following example creates a service account with the minimum necessary permissions to view datasets. See the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic for more information.
+The following example creates a service account with the minimum necessary permissions to view datasets. 
+For more information, see the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic.
 
 <pre class="terminal">$ cf bind-service myapp mydataset -c '{"role": "bigquery.dataViewer"}'
 </pre>
@@ -75,7 +77,8 @@ You can optionally specify the following parameters:
 
 #### Bind
 
-Bind the `google-pubsub` service to an app to create a new service account and private key. The following example creates a service account with minimum necessary permissions to view topics and subscriptions. See the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic for more information.
+Bind the `google-pubsub` service to an app to create a new service account and private key. The following example creates a service account with minimum necessary permissions to view topics and subscriptions. 
+For more information, see the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic.
 
 <pre class="terminal">$ cf bind-service myapp mypubsub -c '{"role": "pubsub.viewer"}'
 </pre>
@@ -125,7 +128,7 @@ If a username and password are not specified, they will be randomly generated.
 
 #### Create 
 
-Using `cf create-service` to create an instance of `google-ml-apis` will not create any resources. This service is for bindings only.
+Using `cf create-service` to create an instance of `google-ml-apis` does not create any resources. This service is for bindings only.
 It is likely that this implementation will change in the future.
 
 <pre class="terminal">$ cf create-service google-ml-apis default mymlapis
@@ -133,7 +136,8 @@ It is likely that this implementation will change in the future.
 
 #### Bind 
 
-Bind the `google-mlapis` service to an app to create a new service account and private key. The following example creates a service account with the minimum necessary permissions to use the Machine Learning APIs. See the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic for more information.
+Bind the `google-mlapis` service to an app to create a new service account and private key. The following example creates a service account with the minimum necessary permissions to use the Machine Learning APIs. 
+For more information, see the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic.
 
 <pre class="terminal">$ cf bind-service myapp mymlapis -c '{"role": "viewer"}'
 </pre>
