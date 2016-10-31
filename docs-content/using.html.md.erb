@@ -117,6 +117,8 @@ Bind the `google-cloudsql` service to an app to create a new user and set of ssl
 <pre class="terminal">$ cf bind-service myapp mycloudsql -c '{"username": "myuser", "password": "mypass"}'
 </pre>
 
+If a username and password are not specified, they will be randomly generated.
+
 <p class="note"><strong>Note</strong>: Run <code>cf unbind-service</code> to delete this user and invalidate the created ssl certs.</p>
 
 ###<a id="pubsub"></a>Google Machine Learning APIs
