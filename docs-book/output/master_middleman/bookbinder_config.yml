@@ -5,9 +5,9 @@
 :subnav_templates:
   myservice: myservice_subnav
 :template_variables: 
-:local_repo_dir: "/Users/ljarzynski/workspace/docs-google"
+:local_repo_dir: "/Users/jday/workspace/docs-google"
 :workspace: !ruby/object:Pathname
-  path: "/Users/ljarzynski/workspace/docs-google/docs-book/output/master_middleman/source"
+  path: "/Users/jday/workspace/docs-google/docs-book/output/master_middleman/source"
 :feedback_enabled: 
 :repo_link_enabled: true
 :repo_links:
