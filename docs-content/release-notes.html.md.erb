@@ -3,42 +3,60 @@ breadcrumb: PCF Services
 title: Release Notes
 ---
 
-## [1.0.1] - 2016-10-07
+### v2.1.2
 
-### Fixed
-- Removed specified stemcell version from `tile.yml` so that the most recent stemcell is used by default.
+**Release Date:** December 21 2016
 
-## [2.0.0] - 2016-10-10
+**Fixed in this release:** A bug where anything that triggered another application of
+**Apply Changes** after installing v2.1.0 or v2.1.1 caused the installation to fail.
 
-### Fixed
-- Fixed CloudSQL docs link in README.
-- Updated credentials type returned by bind call to be a map[string]string instead of a string.
+### v2.1.1
 
-## [2.0.1] - 2016-10-28
+**Release Date:** December 2 2016
 
-- CloudSQL generates a username/password on bind if one is not provided.
+**Feature included in this release:** Added new URI parameter to Cloud SQL bind credentials.
 
-### Fixed
-- CloudSQL custom plans are now optional.
-- Fixed username and password env var names in docs.
-- Fixed CloudSQL custom plan names and/or features not updating.
+### v2.1.0
 
-## [2.0.2] - 2016-11-16
+**Release Date:** December 2 2016
 
-### Fixed
-- Fixed bug where CloudSQL was returning 400s for all 2nd gen instance provision requests.
-
-## [2.1.0] - 2016-12-02
+**Features included in this release:**
 
 - Remove need for service name for PubSub (topic\_name), BigQuery (name), Cloud Storage (name), and Cloud SQL (instance\_name).
 - Instance details are now surfaced in bind requests for Pubsub (topic\_name and subscription\_name),
 Cloud Storage (bucket\_name), BigQuery (dataset\_id), and Cloud SQL (instance\_name, database\_name, and host).
 
-## [2.1.1] - 2016-12-02
+### v2.0.2 
 
-- Added new URI parameter to Cloud SQL bind credentials.
+**Release Date:** November 16 2016
 
-## [2.1.2] - 2016-12-21
+ **Fixed in this release:** Bug where CloudSQL was returning 400s for all second generation instance provision requests.
 
-- fixes a bug where anything that triggered another application of "apply changes" after installing version
- 2.1.0 or 2.1.1 would cause the installation to fail
+### v2.0.1
+
+**Release Date:** October 28 2016
+
+**Feature included in this release:** CloudSQL generates a username/password on bind if one is not provided.
+
+**Fixed in this release:**
+
+- CloudSQL custom plans are now optional.
+- Fixed username and password env var names in docs.
+- Fixed CloudSQL custom plan names and/or features not updating.
+
+### v2.0.0
+
+**Release Date:** October 10 2016
+
+**Fixed in this release:**
+
+- Fixed CloudSQL docs link in README.
+- Updated credentials type returned by bind call to be a mapstringstring instead of a string.
+
+### v1.0.1
+
+**Release Date:** October 7 2016
+
+**Fixed in this release:** 
+Removed specified stemcell version from `tile.yml` so that the most recent stemcell is used by default.
+
