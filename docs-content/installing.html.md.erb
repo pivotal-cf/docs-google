@@ -98,7 +98,19 @@ If you want to enable Cloud SQL for your developers, you must configure plans in
 1. Enter a case-sensitive **Tier/Machine Type** value (e.g. `D4` or `db-n1-standard-2`). See the [Cloud SQL Pricing](https://cloud.google.com/sql/pricing) topic for details.
 1. (Optional) If you selected a first generation instance type when creating your Cloud SQL database, you can change your pricing plan.
 1. (Optional) If you selected a second generation instance type when creating your Cloud SQL database, enter a maximum disk size in GB.
-1. Click **Save**. 
+1. Click **Save**.
+
+###<a id="plans"></a>Bigtable Custom Plans
+
+If you want to enable Bigtable for your developers, you must configure plans in this section. If you do not want to enable Bigtable, ignore this section.
+
+1. Click **Bigtable Custom Plans**.
+    <%= image_tag("images/bigtable_custom_plans.png") %>
+1. To create a plan, click **Add**.
+1. Enter a plan name, a display name, and a description to display in the database.
+1. (Optional) Change the storage type to one of "SSD" or "HDD". See the [Bigtable Pricing](https://cloud.google.com/bigtable/pricing) topic for details.
+1. (Optional) Change the Number of Nodes to an integer value between 3 and 30. See the [Bigtable Pricing](https://cloud.google.com/bigtable/pricing) topic for details.
+1. Click **Save**.
 
 ###<a id="service-access"></a>Service Access
 
