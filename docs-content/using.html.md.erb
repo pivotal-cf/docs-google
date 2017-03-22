@@ -119,8 +119,8 @@ For more information, see the [GCP Understanding Roles](https://cloud.google.com
      "Name": "redacted",
      "PrivateKeyData": "redacted",
      "UniqueId": "redacted",
-     "topic\_name": "foobar",
-     "subscription\_name": "empty\_if\_not\_set",
+     "topic_name": "foobar",
+     "subscription_name": "empty_if_not_set",
 }
 </pre>
 
@@ -143,7 +143,7 @@ You can optionally specify the following parameters:
 * `region`: Defaults to `us-central`.
 * `zone`: Only for 2nd gen.
 * `disk_type`: Only for 2nd gen. Defaults to `ssd`.
-* `failover_replica_name`: Only for 2nd gen. Creates a failover replica if specified. Defaults to "". 
+* `failover_replica_name`: Only for 2nd gen. Creates a failover replica if specified. Defaults to `""`. 
 * `maintenance_window_day`: Only for 2nd gen. Defaults to `1`, which is Sunday.
 * `maintenance_window_hour`: Only for 2nd gen. Defaults to `0`.
 * `backups_enabled` Defaults to `true`. Set to `false` to disable.
@@ -176,11 +176,11 @@ You can optionally specify the following parameters:
      "Password": "unencoded-redacted",
      "Sha1Fingerprint": "redacted",
      "Username": "redacted",
-     "database_name": "redacted",
+     "database\_name": "redacted",
      "host": "255.255.255.255",
-     "instance_name": "redacted",
-     "last_master_operation_id": "some-guid",
-     "uri": "mysql://username:encodedpassword@host/databasename?ssl_mode=required"
+     "instance\_name": "redacted",
+     "last\_master\_operation_id": "some-guid",
+     "uri": "mysql://username:encodedpassword@host/databasename?ssl\_mode=required"
 }
 </pre>
 
