@@ -45,13 +45,16 @@ You can use any MySQL database to back the Service Broker. To use GCP Cloud SQL,
 1. Set up your database instance with the default settings and click **Create**.
 1. After the instance boots, click its name in the list of SQL instances. 
 1. Select **Access Control > SSL**.
+1. Click **Allow only SSL Connections**
 1. Click **Create Client Certificate**. 
 1. Enter a name and click **Add**. A popup appears. 
 1. Download the three certificate files and save them to a secure location.
 1. Record the connection string given at the bottom of the popup.
 1. Under **Access Control > Authorization**, click **Add Network**. 
-1. Enter `0.0.0.0/0` in the **Network** field and click **Done**. 
-1. From a terminal window, connect to the host machine using the connection string that you recorded in an earlier step. 
+1. Enter `0.0.0.0/0` in the **Network** field and click **Done**.
+1. Under **Access Control > Users**, click the three dot icon to open the menu next to the `root` user, then click **Change Password**.
+1. Enter a new password for the `root` user and click **OK**.
+1. From a terminal window, connect to the host machine using the connection string that you recorded in an earlier step, using the `root` user and password.
 1. In the terminal window, run the following commands:
     1. `CREATE DATABASE servicebroker;`
     1. `CREATE USER 'USERNAME'@'%' IDENTIFIED BY 'PASSWORD';`
@@ -110,6 +113,17 @@ If you want to enable Bigtable for your developers, follow the steps below.
 1. Enter a **Plan Name**, a **Display Name**, and a **Description** to display in the database.
 1. For the **Storage Type**, specify either <code>SSD</code> or <code>HDD</code>. The default is `SSD`. For more information, see [Bigtable Pricing](https://cloud.google.com/bigtable/pricing).
 1. For the **Number of Nodes**, specify an integer value between `3` and `30`. The default is `3`. For more information, see [Bigtable Pricing](https://cloud.google.com/bigtable/pricing).
+1. Click **Save**.
+
+###<a id="plans"></a>Spanner Custom Plans
+
+If you want to enable Spanner for your developers, follow the steps below.
+
+1. Click **Spanner Custom Plans**.
+    <%= image_tag("images/spanner_custom_plans.png") %>
+1. To create a plan, click **Add**.
+1. Enter a **Plan Name**, a **Display Name**, and a **Description** to display in the database.
+1. For the **Number of Nodes**, specify a positive integer value. The default is `3`. For more information, see [Spanner Pricing](https://cloud.google.com/spanner/pricing).
 1. Click **Save**.
 
 ###<a id="service-access"></a>Service Access
