@@ -283,6 +283,62 @@ For more information, see the [GCP Understanding Roles](https://cloud.google.com
 }
 </pre>
 
+###<a id="google-stackdriver-debugger"></a>Stackdriver Debugger
+
+#### Create 
+
+Using `cf create-service` to create an instance of `google-stackdriver-debugger` does not create any resources. This service is for bindings only.
+
+<pre class="terminal">$ cf create-service google-stackdriver-debugger default my-debugger
+</pre>
+
+#### Bind 
+
+Bind the `google-stackdriver-debugger` service to an app to create a new service account and private key. The following example creates a service account with the minimum necessary permissions act as a Stackdriver Debugger Agent. 
+For more information, see the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic.
+
+<pre class="terminal">$ cf bind-service myapp my-debugger 
+</pre>
+
+<p class="note"><strong>Note</strong>: Run <code>cf unbind-service</code> to  delete the service account and key created when binding.</p>
+
+**Example Binding credentials**
+<pre>"credentials": {
+     "Email": "redacted",
+     "Name": "redacted",
+     "PrivateKeyData": "redacted",
+     "UniqueId": "redacted",
+}
+</pre>
+
+###<a id="google-stackdriver-trace"></a>Stackdriver Trace
+
+#### Create 
+
+Using `cf create-service` to create an instance of `google-stackdriver-trace` does not create any resources. This service is for bindings only.
+
+<pre class="terminal">$ cf create-service google-stackdriver-trace default my-tracer
+</pre>
+
+#### Bind 
+
+Bind the `google-stackdriver-trace` service to an app to create a new service account and private key. The following example creates a service account with the minimum necessary permissions act as a Stackdriver Trace Agent. 
+For more information, see the [GCP Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) topic.
+
+<pre class="terminal">$ cf bind-service myapp my-tracer 
+</pre>
+
+<p class="note"><strong>Note</strong>: Run <code>cf unbind-service</code> to  delete the service account and key created when binding.</p>
+
+**Example Binding credentials**
+<pre>"credentials": {
+     "Email": "redacted",
+     "Name": "redacted",
+     "PrivateKeyData": "redacted",
+     "UniqueId": "redacted",
+}
+</pre>
+
 ##<a id="delete"></a>Delete a Service Instance
 
 <p class="note"><strong>Note</strong>: Before deleting a service instance, ensure there are no apps bound to the service instance and no data contained within, such as objects in a storage bucket.</p>
