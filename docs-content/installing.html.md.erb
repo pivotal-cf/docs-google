@@ -90,17 +90,29 @@ Click the newly added tile and configure the following sections:
 1. Ensure your database port is set to `3306`. Modify your port configuration if necessary.
 1. Click **Save**. 
 
-###<a id="plans"></a>Cloud SQL Custom Plans
+###<a id="plans"></a>Cloud SQL (MySQL) Custom Plans
 
-If you want to enable Cloud SQL for your developers, you must configure plans in this section. If you do not want to enable Cloud SQL, ignore this section.
+If you want to enable Cloud SQL MySQL for your developers, you must configure plans in this section. If you do not want to enable Cloud SQL, ignore this section.
 
-1. Click **Cloud SQL Custom Plans**.
-    <%= image_tag("images/cloudsql_custom_plans.png") %>
+1. Click **Cloud SQL MySQL Custom Plans**.
+    <%= image_tag("images/cloudsql_mysql_custom_plans.png") %>
 1. To create a plan, click **Add**. 
 1. Enter a plan name, a display name, and a description to display in the database.
 1. Enter a case-sensitive **Tier/Machine Type** value (e.g. `D4` or `db-n1-standard-2`). See the [Cloud SQL Pricing](https://cloud.google.com/sql/pricing) topic for details.
 1. (Optional) If you selected a first generation instance type when creating your Cloud SQL database, you can change your pricing plan.
 1. (Optional) If you selected a second generation instance type when creating your Cloud SQL database, enter a maximum disk size in GB.
+1. Click **Save**.
+
+###<a id="plans"></a>Cloud SQL (PostgreSQL) Custom Plans
+
+If you want to enable Cloud SQL PostgreSQL for your developers, you must configure plans in this section. If you do not want to enable Cloud SQL, ignore this section.
+
+1. Click **Cloud SQL PostgreSQL Custom Plans**.
+    <%= image_tag("images/cloudsql_postgres_custom_plans.png") %>
+1. To create a plan, click **Add**.
+1. Enter a plan name, a display name, and a description to display in the database.
+1. Enter a case-sensitive **Tier/Machine Type** value of the form "custom-db-<CPUs>-<Memory-MB>", where <Memory-MB> must be at least 3840. See the [Cloud SQL Pricing](https://cloud.google.com/sql/pricing#pg-pricing) topic for details.
+1. (Optional) Enter a maximum disk size in GB.
 1. Click **Save**.
 
 ###<a id="bt-plans"></a>Bigtable Custom Plans
