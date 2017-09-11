@@ -98,7 +98,8 @@ If you want to enable Cloud SQL MySQL for your developers, you must configure pl
     <%= image_tag("images/cloudsql_mysql_custom_plans.png") %>
 1. To create a plan, click **Add**. 
 1. Enter a plan name, a display name, and a description to display in the database.
-1. Enter a case-sensitive **Tier/Machine Type** value (e.g. `D4` or `db-n1-standard-2`). See the [Cloud SQL Pricing](https://cloud.google.com/sql/pricing) topic for details.
+1. Enter a case-sensitive **Tier/Machine Type** value (e.g. `D4` or `db-n1-standard-2`).
+   See [Cloud SQL Pricing](https://cloud.google.com/sql/pricing) for details.
 1. (Optional) If you selected a first generation instance type when creating your Cloud SQL database, you can change your pricing plan.
 1. (Optional) If you selected a second generation instance type when creating your Cloud SQL database, enter a maximum disk size in GB.
 1. Click **Save**.
@@ -111,7 +112,8 @@ If you want to enable Cloud SQL PostgreSQL for your developers, you must configu
     <%= image_tag("images/cloudsql_postgres_custom_plans.png") %>
 1. To create a plan, click **Add**.
 1. Enter a plan name, a display name, and a description to display in the database.
-1. Enter a case-sensitive **Tier/Machine Type** value of the form "custom-db-<CPUs>-<Memory-MB>", where <Memory-MB> must be at least 3840. See the [Cloud SQL Pricing](https://cloud.google.com/sql/pricing#pg-pricing) topic for details.
+1. Enter a case-sensitive **Tier/Machine Type** value of the form "custom-db-<CPUs>-<Memory-MB>", where <Memory-MB> must be at least 3840.
+   For details, see [Cloud SQL Pricing](https://cloud.google.com/sql/pricing#pg-pricing).
 1. (Optional) Enter a maximum disk size in GB.
 1. Click **Save**.
 
@@ -153,7 +155,9 @@ By default, all orgs and spaces can access all services and plans used by the GC
 
 1. After Ops Manager finishes the installation, the **GCP Service Broker** appears as a green tile in the **Installation Dashboard**.
 
-1. In Apps Manager, all orgs and spaces show the new services in the Services Marketplace. Users can create instances of these services through Apps Manager or by using the Cloud Foundry Command Line Interface (cf CLI). Review the [Using GCP Service Broker](using.html) topic for more information.
+1. In Apps Manager, all orgs and spaces show the new services in the Services Marketplace.
+   Users can create instances of these services through Apps Manager or by using the Cloud Foundry Command Line Interface (cf CLI).
+   For more information, see [Using GCP Service Broker](using.html).
 
 ##<a id="service-access"></a>Step 8: Confirm Service and Plan Access
 
