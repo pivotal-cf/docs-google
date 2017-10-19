@@ -7,10 +7,12 @@ title: Release Notes
 
 **Release Date:** October 19, 2017
 
-**Features included in this release:**
+**Fixed in this release:**
 
-- Fix PostgreSQL connection URL
-- Added, wait for SSL certs to finish being created, in SQL account manager
+- Fixed issue where, during user account creation, the SQL account manager did not wait for SSL
+ certificates to finish generating before returning credential information to the client.
+- Fixed PostgreSQL connection URL
+
 
 ### v3.5.1
 
@@ -28,7 +30,7 @@ title: Release Notes
 
 **Fixed in this release:**
 
-- Fix uninitialized security group
+- Fixed uninitialized security group
 
 
 ### v3.4.0
@@ -37,7 +39,7 @@ title: Release Notes
 
 **Fixed in this release:**
 
-- Add Stackdriver services to tile.yml
+- Added Stackdriver services to tile.yml
 
 
 ### v3.3.2
