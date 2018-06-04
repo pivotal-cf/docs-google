@@ -158,8 +158,10 @@ For more information, see the [GCP Understanding Roles](https://cloud.google.com
 
 #### Create 
 
-Run `cf create-service google-cloudsql` to create a new database instance and database. PCF Operators create custom plans for Google Cloud SQL when installing the GCP Service Broker. The following example creates an instance named `myinstance` and a database named `mydb` with a custom `d4_standard` plan:
-<pre class="terminal">$ cf create-service google-cloudsql d4\_standard mycloudsql
+Run `cf create-service google-cloudsql-mysql` to create a new MySQL database instance and database, and `cf create-service google-cloudsql-postgres` for the PostgreSQL equivalent.
+PCF Operators create custom plans for Google Cloud SQL when installing the GCP Service Broker.
+The following example creates a MySQL instance named `myinstance` and a database named `mydb` with a custom `mysql-micro-dev` plan:
+<pre class="terminal">$ cf create-service google-cloudsql-mysql mysql-micro-dev mycloudsql
 </pre>
 
 <p class="note"><strong>Note</strong>: Google Cloud SQL uses asynchronous provisioning.</p>
