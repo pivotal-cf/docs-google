@@ -3,6 +3,42 @@ breadcrumb: PCF Services
 title: Release Notes
 ---
 
+### v4.0.0
+
+**Release Date:** September 26, 2018
+
+**Important**: if you are upgrading from 3.x, follow the [upgrading docs](https://github.com/GoogleCloudPlatform/gcp-service-broker/blob/master/docs/upgrading.md) to ensure your plans continue to work.
+
+### Added
+- New sub-command `plan-info` to dump plan information to the console.
+- New sub-command `client` to execute documentation examples and interact with the broker.
+- New sub-command `help` which outputs help documentation.
+- New sub-command `config` which can convert between configuration file formats.
+- New sub-command `generate` to generate use, tile forms, and configuration documentation.
+- New sub-command `serve` to run the service broker server.
+- New sub-command `show` to dump database state.
+- The ability to configure the system with YAML, TOML, properties, or JSON configuration files via the `--config` flag in conjunction with using environment variables.
+- The ability to customize the database name in the Tile.
+- The ability to turn on/off services via environment variable.
+- Default plans for Spanner, BigTable, and CloudSQL.
+- Whitelists for bindings so only certain "safe" roles can be chosen by end-users.
+- Automatic labeling of resources with organization GUID, space GUID, and instance ID to BigQuery, CloudSQL, Spanner, and Cloud Storage.
+
+### Deprecated
+- Running the service by executing the main executable. Use the `serve` sub-command instead.
+
+### Changed
+- **Breaking** plan ids are now required and will not be generated if not supplied.
+- **Breaking** changed custom plan id field name from `guid` to `id`.
+- **Breaking** modified `"features"` plan configuration field name to `"service_properties"`.
+- **Breaking** modified structure of all catalog-related environment variables - `plans` is now a sub-field of the Service object,
+and Service objects are defined individually by setting environment variables like `GOOGLE_<SERVICE_NAME>`
+- You no longer have to specify service information in the manifest.
+- **Breaking** The Cloud Storage plan `reduced_availability` was changed to `reduced-availability` to be compliant with the spec and work with Kubernetes.
+- Tables are created only if they do not exist on migration, fixing [#194](https://github.com/GoogleCloudPlatform/gcp-service-broker/issues/194).
+- The broker now adheres to Open Service Broker API version 2.13.
+- Improved ORM migrations and test coverage with SQLite3.
+
 ### v3.6.0
 
 **Release Date:** January 4, 2018
