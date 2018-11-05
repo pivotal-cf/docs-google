@@ -3,6 +3,30 @@ breadcrumb: PCF Services
 title: Release Notes
 ---
 
+### v4.1.0
+
+**Release Date:** November 5, 2018
+
+#### Added
+- Pub/Sub now adds default labels to created topics and subscriptions.
+- New validation documentation for Pub/Sub.
+- Ability for operators to override the provision defaults with fixed values.
+- New form to let operators set provision defaults.
+- New `coldline` Cloud Storage plan.
+- Ability to create custom Cloud Storage plans.
+- New tile form for creating custom Cloud Storage plans.
+- Examples of binding variables to the docs.
+- Constraints/validation of the binding variables to the docs.
+- New `version` sub-command to show the current version of the binary.
+- New `generate` sub-commands to generate the `tile.yml` and `manifest.yml` files.
+
+#### Changed
+- Role whitelists are now validated through JSON Schema checks.
+- The `run-examples` sub-command now evaluates the credentials against the JSON Schema, improving robustness.
+
+#### Fixed
+- Fixed issue where Cloud Datastore service accounts were getting the same name.
+
 ### v4.0.0
 
 **Release Date:** September 27, 2018
@@ -225,7 +249,7 @@ any extra access details
 - Instance details are now surfaced in bind requests for Pubsub (topic\_name and subscription\_name),
 Cloud Storage (bucket\_name), BigQuery (dataset\_id), and Cloud SQL (instance\_name, database\_name, and host).
 
-### v2.0.2 
+### v2.0.2
 
 **Release Date:** November 16, 2016
 
@@ -256,5 +280,5 @@ Cloud Storage (bucket\_name), BigQuery (dataset\_id), and Cloud SQL (instance\_n
 
 **Release Date:** October 7, 2016
 
-**Fixed in this release:** 
+**Fixed in this release:**
 Removed specified stemcell version from `tile.yml` so that the most recent stemcell is used by default.
