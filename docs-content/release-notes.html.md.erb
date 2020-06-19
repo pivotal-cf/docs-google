@@ -140,7 +140,7 @@ If you must run it on a public network, make it accessible through a proxy that 
 - New `generate` sub-commands to generate the `tile.yml` and `manifest.yml` files.
 
 #### Changed
-- Role whitelists are now validated through JSON Schema checks.
+- Role Allowlists are now validated through JSON Schema checks.
 - The `run-examples` sub-command now evaluates the credentials against the JSON Schema, improving robustness.
 
 #### Fixed
@@ -168,7 +168,7 @@ See <a href="https://github.com/GoogleCloudPlatform/gcp-service-broker/blob/mast
 - The ability to customize the database name in the tile.
 - The ability to turn on/off services using an environment variable.
 - Default plans for Spanner, BigTable, and CloudSQL.
-- Whitelists for bindings so only certain "safe" roles can be chosen by end-users.
+- Allowlists for bindings so only certain "safe" roles can be chosen by end-users.
 - Automatic labeling of resources with organization GUID, space GUID, and instance ID to
   BigQuery, CloudSQL, Spanner, and Cloud Storage.
 
