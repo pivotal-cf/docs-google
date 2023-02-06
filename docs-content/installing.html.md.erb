@@ -30,7 +30,7 @@ Follow the steps below to set up a "root" Service Account.
 
 1. From the GCP console, navigate to **IAM & Admin > Service accounts** and click **Create Service Account**.
 1. Enter a Service account name.
-1. Select the checkbox to **Furnish a new Private Key**, then click **Create**. 
+1. Select the checkbox to **Furnish a new Private Key**, then click **Create**.
 1. Save the automatically downloaded key file to a secure location.
 1. Navigate to **IAM & Admin > IAM** and locate your service account.
 1. From the dropdown on the right, choose **Project > Owner** and click **Save**.
@@ -41,16 +41,16 @@ You can use any MySQL database to back the Service Broker. To use GCP Cloud SQL,
 
 <p class="note"><strong>Note</strong>: Pivotal recommends using Cloud SQL if your VMware Tanzu deployment runs on GCP.</p>
 
-1. From the GCP console, select **SQL**, and then click **Create instance**. 
+1. From the GCP console, select **SQL**, and then click **Create instance**.
 1. Set up your database instance with the default settings and click **Create**.
-1. After the instance boots, click its name in the list of SQL instances. 
+1. After the instance boots, click its name in the list of SQL instances.
 1. Select **Access Control > SSL**.
 1. Click **Allow only SSL Connections**
-1. Click **Create Client Certificate**. 
-1. Enter a name and click **Add**. A popup appears. 
+1. Click **Create Client Certificate**.
+1. Enter a name and click **Add**. A popup appears.
 1. Download the three certificate files and save them to a secure location.
 1. Record the connection string given at the bottom of the popup.
-1. Under **Access Control > Authorization**, click **Add Network**. 
+1. Under **Access Control > Authorization**, click **Add Network**.
 1. Enter `0.0.0.0/0` in the **Network** field and click **Done**.
 1. Under **Access Control > Users**, click the three dot icon to open the menu next to the `root` user, then click **Change Password**.
 1. Enter a new password for the `root` user and click **OK**.
@@ -76,78 +76,92 @@ Click the newly added tile and configure the following sections:
 
 ###<a id="root-service-account"></a>Root Service Account
 
-1. Click **Root Service Account**. 
-    <%= image_tag("images/root_service_account.png") %>
-1. Paste the contents of your service account private key file from [Step 1](#setup) into the text box. 
-1. Click **Save**.
+1. Click **Root Service Account**.
+
+    ![alt-text=""](images/root_service_account.png)
+
+2. Paste the contents of your service account private key file from [Step 1](#setup-project) into the text box.
+3. Click **Save**.
 
 ###<a id="database-properties"></a>Database Properties
 
 1. Click **Database Properties**.
-    <%= image_tag("images/database_properties.png") %>
-1. For **hostname**, enter the public IP address of your database. 
-1. Enter the username, password, and ssl-certs for your database. 
-1. Ensure your database port is set to `3306`. Modify your port configuration if necessary.
-1. Click **Save**. 
+
+    ![alt-text=""](images/database_properties.png)
+
+2. For **hostname**, enter the public IP address of your database.
+3. Enter the username, password, and ssl-certs for your database.
+4. Ensure your database port is set to `3306`. Modify your port configuration if necessary.
+5. Click **Save**.
 
 ###<a id="plans"></a>Cloud SQL (MySQL) Custom Plans
 
 If you want to enable Cloud SQL MySQL for your developers, you must configure plans in this section. If you do not want to enable Cloud SQL, ignore this section.
 
 1. Click **Cloud SQL MySQL Custom Plans**.
-    <%= image_tag("images/cloudsql_mysql_custom_plans.png") %>
-1. To create a plan, click **Add**. 
-1. Enter a plan name, a display name, and a description to display in the database.
-1. Enter a case-sensitive **Tier/Machine Type** value (e.g. `D4` or `db-n1-standard-2`).
+
+    ![alt-text=""](images/cloudsql_mysql_custom_plans.png)
+
+2. To create a plan, click **Add**.
+3. Enter a plan name, a display name, and a description to display in the database.
+4. Enter a case-sensitive **Tier/Machine Type** value (e.g. `D4` or `db-n1-standard-2`).
    See [Cloud SQL Pricing](https://cloud.google.com/sql/pricing) for details.
-1. (Optional) If you selected a first generation instance type when creating your Cloud SQL database, you can change your pricing plan.
-1. (Optional) If you selected a second generation instance type when creating your Cloud SQL database, enter a maximum disk size in GB.
-1. Click **Save**.
+5. (Optional) If you selected a first generation instance type when creating your Cloud SQL database, you can change your pricing plan.
+6. (Optional) If you selected a second generation instance type when creating your Cloud SQL database, enter a maximum disk size in GB.
+7. Click **Save**.
 
 ###<a id="plans"></a>Cloud SQL (PostgreSQL) Custom Plans
 
 If you want to enable Cloud SQL PostgreSQL for your developers, you must configure plans in this section. If you do not want to enable Cloud SQL, ignore this section.
 
 1. Click **Cloud SQL PostgreSQL Custom Plans**.
-    <%= image_tag("images/cloudsql_postgres_custom_plans.png") %>
-1. To create a plan, click **Add**.
-1. Enter a plan name, a display name, and a description to display in the database.
-1. Enter a case-sensitive **Tier/Machine Type** value of the form "db-custom-&lt;CPUs&gt;-&lt;Memory-MB&gt;", where &lt;Memory-MB&gt; must be at least 3840.
+
+    ![alt-text=""](images/cloudsql_postgres_custom_plans.png)
+
+2. To create a plan, click **Add**.
+3. Enter a plan name, a display name, and a description to display in the database.
+4. Enter a case-sensitive **Tier/Machine Type** value of the form "db-custom-&lt;CPUs&gt;-&lt;Memory-MB&gt;", where &lt;Memory-MB&gt; must be at least 3840.
    For details, see [Cloud SQL Pricing](https://cloud.google.com/sql/pricing#pg-pricing).
-1. (Optional) Enter a maximum disk size in GB.
-1. Click **Save**.
+5. (Optional) Enter a maximum disk size in GB.
+6. Click **Save**.
 
 ###<a id="bt-plans"></a>Bigtable Custom Plans
 
 If you want to enable Bigtable for your developers, follow the steps below.
 
 1. Click **Bigtable Custom Plans**.
-    <%= image_tag("images/bigtable_custom_plans.png") %>
-1. To create a plan, click **Add**.
-1. Enter a **Plan Name**, a **Display Name**, and a **Description** to display in the database.
-1. For the **Storage Type**, specify either <code>SSD</code> or <code>HDD</code>. The default is `SSD`. For more information, see [Bigtable Pricing](https://cloud.google.com/bigtable/pricing).
-1. For the **Number of Nodes**, specify an integer value between `3` and `30`. The default is `3`. For more information, see [Bigtable Pricing](https://cloud.google.com/bigtable/pricing).
-1. Click **Save**.
+
+    ![alt-text=""](images/bigtable_custom_plans.png)
+
+2. To create a plan, click **Add**.
+3. Enter a **Plan Name**, a **Display Name**, and a **Description** to display in the database.
+4. For the **Storage Type**, specify either <code>SSD</code> or <code>HDD</code>. The default is `SSD`. For more information, see [Bigtable Pricing](https://cloud.google.com/bigtable/pricing).
+5. For the **Number of Nodes**, specify an integer value between `3` and `30`. The default is `3`. For more information, see [Bigtable Pricing](https://cloud.google.com/bigtable/pricing).
+6. Click **Save**.
 
 ###<a id="plans"></a>Spanner Custom Plans
 
 If you want to enable Spanner for your developers, follow the steps below.
 
 1. Click **Spanner Custom Plans**.
-    <%= image_tag("images/spanner_custom_plans.png") %>
-1. To create a plan, click **Add**.
-1. Enter a **Plan Name**, a **Display Name**, and a **Description** to display in the database.
-1. For the **Number of Nodes**, specify a positive integer value. The default is `3`. For more information, see [Spanner Pricing](https://cloud.google.com/spanner/pricing).
-1. Click **Save**.
+
+    ![alt-text=""](images/spanner_custom_plans.png)
+
+2. To create a plan, click **Add**.
+3. Enter a **Plan Name**, a **Display Name**, and a **Description** to display in the database.
+4. For the **Number of Nodes**, specify a positive integer value. The default is `3`. For more information, see [Spanner Pricing](https://cloud.google.com/spanner/pricing).
+5. Click **Save**.
 
 ###<a id="service-access"></a>Service Access
 
-By default, all orgs and spaces can access all services and plans used by the GCP Service Broker. Follow the instructions below to disable the default access. 
+By default, all orgs and spaces can access all services and plans used by the GCP Service Broker. Follow the instructions below to disable the default access.
 
 1. Click **Service Access**.
-    <%= image_tag("images/service_access.png") %>
-1. Clear the **Enable global access to plans of service gcp\_service\_broker** checkbox. 
-1. Click **Save**.
+
+    ![alt-text=""](images/service_access.png)
+
+2. Clear the **Enable global access to plans of service gcp\_service\_broker** checkbox.
+3. Click **Save**.
 
 ##<a id="confirm"></a>Step 7: Confirm Installation
 
@@ -161,6 +175,6 @@ By default, all orgs and spaces can access all services and plans used by the GC
 
 ##<a id="service-access"></a>Step 8: Confirm Service and Plan Access
 
-The GCP Service Broker installs with all services enabled by default, except for Cloud SQL, which you select to enable or not during configuration. 
+The GCP Service Broker installs with all services enabled by default, except for Cloud SQL, which you select to enable or not during configuration.
 
 You can disable or enable any services through the cf CLI using `cf disable-service-access` or `cf enable-service-access`.
